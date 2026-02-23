@@ -1,0 +1,161 @@
+:root {
+    --primary: #ff3366;
+    --secondary: #7000ff;
+    --accent: #00f2ff;
+    --glass: rgba(255, 255, 255, 0.05);
+    --text: #ffffff;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Base Setup --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #020205;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Start at top to allow scrolling */
+    overflow-x: hidden;
+    overflow-y: hidden; /* JavaScript will unlock this on click */
+    perspective: 1000px;
+    line-height: 1.6;
+}
+
+/* --- Dynamic Background --- */
+.background-wrapper {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #0a0a1a 0%, #020205 100%);
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: float 15s infinite alternate ease-in-out;
+    opacity: 0.5;
+}
+
+.orb-1 { width: 400px; height: 400px; background: var(--primary); top: -10%; left: -10%; }
+.orb-2 { width: 500px; height: 500px; background: var(--secondary); bottom: -10%; right: -10%; animation-delay: -3s; }
+.orb-3 { width: 300px; height: 300px; background: var(--accent); top: 40%; left: 30%; animation-delay: -7s; }
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    100% { transform: translate(100px, 150px) scale(1.3) rotate(90deg); }
+}
+
+/* --- Glassmorphism Container --- */
+.glass-container {
+    background: var(--glass);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 60px 40px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+    margin: 40px auto; /* Centers in scrollable space */
+    animation: entrance 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes entrance {
+    from { opacity: 0; transform: scale(0.9) translateY(40px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* --- Hero Section --- */
+.profile-wrapper {
+    position: relative;
+    width: 180px; height: 180px;
+    margin: 0 auto 30px;
+}
+
+.main-photo {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 10px;
+}
+
+.svg-ring {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    fill: none; stroke: var(--primary); stroke-width: 2;
+    stroke-dasharray: 300; stroke-dashoffset: 300;
+    animation: drawRing 2s forwards 0.5s ease-out;
+}
+
+@keyframes drawRing { to { stroke-dashoffset: 0; } }
+
+.reveal-text { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 10px; }
+.name { color: var(--primary); font-style: italic; }
+
+.premium-btn {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white; border: none; padding: 18px 45px;
+    font-size: 1.1rem; font-weight: 600; border-radius: 50px;
+    cursor: pointer; margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+    transition: all 0.4s;
+}
+
+.premium-btn:hover { transform: scale(1.1) rotate(-1deg); box-shadow: 0 15px 40px rgba(255, 51, 102, 0.5); }
+
+/* --- Hidden & Content Sections --- */
+.hidden { display: none; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+
+.card-item {
+    background: rgba(255,255,255,0.03);
+    padding: 30px; border-radius: 30px;
+    margin: 30px 0; border: 1px solid var(--border);
+}
+
+.stats-row { display: flex; justify-content: space-around; margin: 30px 0; align-items: center; }
+.counter { font-size: 2.5rem; font-weight: 700; color: var(--accent); display: block; }
+.heart-icon { font-size: 3rem; animation: heartBeat 1.5s infinite; }
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); filter: brightness(1.2); }
+}
+
+/* --- Voucher Surprise --- */
+.voucher {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    padding: 25px; border-radius: 20px;
+    border: 2px dashed var(--primary);
+    margin-top: 20px;
+    animation: glowVoucher 3s infinite alternate;
+}
+
+@keyframes glowVoucher {
+    from { box-shadow: 0 0 10px rgba(255, 51, 102, 0.2); }
+    to { box-shadow: 0 0 30px rgba(255, 51, 102, 0.5); }
+}
+
+.voucher-label { font-size: 0.7rem; letter-spacing: 3px; color: var(--primary); margin-bottom: 10px; }
+.voucher-prize { font-size: 1.2rem; font-weight: 600; color: #fff; margin: 10px 0; }
+.barcode { font-family: monospace; opacity: 0.5; font-size: 0.9rem; }
+
+.footer-note { margin-top: 40px; opacity: 0.6; font-style: italic; }
+
+
+/* Add this to your existing style.css */
+.link-to-letter {
+    display: inline-block; /* Make it behave like a button */
+    text-decoration: none; /* Remove underline */
+    margin-top: 30px;
+    /* Inherits premium-btn styles, adjust if needed */
+}
+
+.link-to-letter span {
+    color: white; /* Ensure text color is white */
+}

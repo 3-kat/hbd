@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter Etched in Time</title>
+    <link rel="stylesheet" href="letter_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-jeju"></div>
+    <div class="overlay"></div>
+
+    <div class="letter-container">
+        <p class="handwritten-text">
+            My dearest love,
+            Every beat of my heart whispers your name. You are the gentle breeze on Jeju, the vibrant hue of cherry blossoms, and the unwavering light that guides me. With every passing day, my love for you deepens, echoing the eternal ocean. Thank you for being you, for being my everything.
+            Forever and always,
+            [Your Name]
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textElement = document.querySelector('.handwritten-text');
+            const fullText = textElement.innerHTML;
+            textElement.innerHTML = ''; // Clear text to type it out
+
+            let charIndex = 0;
+            const typingSpeed = 70; // milliseconds per character
+
+            function typeWriter() {
+                if (charIndex < fullText.length) {
+                    textElement.innerHTML += fullText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, typingSpeed);
+                } else {
+                    // Once typing is done, ensure the text remains visible and clean
+                    textElement.style.overflow = 'visible'; 
+                }
+            }
+            typeWriter();
+        });
+    </script>
+</body>
+</html>

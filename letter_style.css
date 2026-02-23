@@ -1,0 +1,93 @@
+:root {
+    --jeju-text-color: #f7e6e6; /* Soft off-white for text */
+    --overlay-color: rgba(0, 0, 0, 0.4); /* Darker overlay for contrast */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif; /* Fallback for main body text */
+    color: var(--jeju-text-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.background-jeju {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('jeju_bg.png'); /* Ensure this path is correct */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.8) contrast(1.1); /* Enhance aesthetic */
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--overlay-color);
+    z-index: -1;
+}
+
+.letter-container {
+    background: rgba(255, 255, 255, 0.08); /* Subtle glass background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 700px;
+    margin: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    animation: fadeInScale 1.5s ease-out;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.handwritten-text {
+    font-family: 'Dancing Script', cursive; /* The cursive font */
+    font-size: 2.2rem; /* Larger for impact */
+    line-height: 1.8;
+    color: var(--jeju-text-color);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Soft glow */
+    white-space: pre-wrap; /* Maintains line breaks */
+    overflow: hidden; /* Important for typing effect */
+    border-right: .15em solid var(--jeju-text-color); /* Cursor effect */
+    animation: blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--jeju-text-color); }
+}
+
+/* Optional: Add a subtle falling cherry blossom animation */
+.falling-petal {
+    position: absolute;
+    background-color: #ffb3c1; /* Pink */
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fall 10s linear infinite;
+}
+
+/* You can add multiple falling-petal elements in HTML for more */
+/* For example, 10-20 of them, each with a different delay */
+/* Example: <div class="falling-petal" style="left: 20%; animation-delay: 2s;"></div> */
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0; }
+}
